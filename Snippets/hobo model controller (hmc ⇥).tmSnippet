@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>hobo_model_controller</string>
+	<key>name</key>
+	<string>hobo model controller (hmc ⇥)</string>
+	<key>scope</key>
+	<string>source.ruby.rails</string>
+	<key>tabTrigger</key>
+	<string>hmc</string>
+	<key>uuid</key>
+	<string>226A9D38-DAA9-4555-A38A-E6BF22791008</string>
+</dict>
+</plist>

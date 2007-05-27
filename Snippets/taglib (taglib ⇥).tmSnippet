@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>&lt;taglib src="${1:plugins/hobo/tags/rapid}"/&gt;</string>
+	<key>name</key>
+	<string>taglib (taglib ⇥)</string>
+	<key>scope</key>
+	<string>text.html.ruby.dryml</string>
+	<key>tabTrigger</key>
+	<string>taglib</string>
+	<key>uuid</key>
+	<string>1A564619-14D0-483D-A173-98CB1F6FB026</string>
+</dict>
+</plist>

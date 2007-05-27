@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>Hobo</string>
+	<key>ordering</key>
+	<array>
+		<string>A23AB02A-583D-4A7B-80D2-E76FFBE384E2</string>
+		<string>7F24E728-2E0D-4EF7-B759-CF4F444AC1B8</string>
+		<string>74DD4B28-C052-4E0A-A6BE-2F791E7C2429</string>
+		<string>EED56540-BB6E-4FAF-B225-EDB13EC2F9B4</string>
+		<string>7215649E-7523-4BED-BB1A-9112D3D17752</string>
+		<string>E30F9E79-051A-430C-934F-0DBB1E720816</string>
+		<string>BFAC6E02-F64C-4BA0-8DE3-2B8AEC600D76</string>
+		<string>D4741EDA-C625-4451-9AD3-1FF0154CC856</string>
+		<string>1A564619-14D0-483D-A173-98CB1F6FB026</string>
+		<string>226A9D38-DAA9-4555-A38A-E6BF22791008</string>
+		<string>869E187D-AD6A-4020-A218-5955313B9406</string>
+		<string>21882A84-5563-48E6-AB53-6AA4C2C372BE</string>
+		<string>0FC44D5A-B0FB-4380-8DE4-E4F2A82C9D21</string>
+		<string>04CFCBEE-D8C9-48E5-BA12-6E5D1E519CE7</string>
+	</array>
+	<key>uuid</key>
+	<string>751D6A7A-9E05-406D-98AC-2268D256B1B7</string>
+</dict>
+</plist>

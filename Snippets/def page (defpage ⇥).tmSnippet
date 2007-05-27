@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>&lt;def tag="page" attrs="title${1/(.*)/,/}${1:}"&gt;
+	&lt;% title ||= human_type + ": " + display_name(:no_span =&gt; true) %&gt;
+	&lt;%= '&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;' %&gt;
+	&lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"&gt;
+	&lt;head&gt;
+		&lt;meta http-equiv="Content-Type" content="text/html;  charset=utf-8" /&gt;
+		&lt;title&gt;&lt;%= title %&gt;&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		${2:page content}
+	&lt;/body&gt;
+&lt;/html&gt;</string>
+	<key>name</key>
+	<string>def page (defpage ⇥)</string>
+	<key>scope</key>
+	<string>text.html.ruby.dryml</string>
+	<key>tabTrigger</key>
+	<string>defpage</string>
+	<key>uuid</key>
+	<string>0FC44D5A-B0FB-4380-8DE4-E4F2A82C9D21</string>
+</dict>
+</plist>
