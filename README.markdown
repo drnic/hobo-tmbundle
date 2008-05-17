@@ -14,8 +14,10 @@ Source can be viewed or forked via GitHub: [http://github.com/drnic/hobo-tmbundl
 Original Author
 ===============
 
-Niko Dittmann
-SVN: [http://www.opensvn.niko-dittmann.com/hobo_tmbundle/trunk/Hobo.tmbundle](http://www.opensvn.niko-dittmann.com/hobo_tmbundle/trunk/Hobo.tmbundle)
+Niko Dittmann, [http://niko-dittmann.com/](http://niko-dittmann.com/)
+
+* [Original forum discussion](http://hobocentral.net/forum/viewtopic.php?t=2328)
+* [Original SVN](http://www.opensvn.niko-dittmann.com/hobo_tmbundle/trunk/Hobo.tmbundle)
 
 Maintainer
 ==========
