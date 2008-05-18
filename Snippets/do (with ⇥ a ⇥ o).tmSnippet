@@ -3,14 +3,16 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>&lt;a $0/&gt;</string>
+	<string>&lt;do with="${2:&amp;${1:expr}}"&gt;
+	$0
+&lt;/do&gt;</string>
 	<key>name</key>
-	<string>a (a ⇥ a ⇥ o)</string>
+	<string>do (with ⇥ a ⇥ o)</string>
 	<key>scope</key>
 	<string>text.html.ruby.dryml</string>
 	<key>tabTrigger</key>
-	<string>a</string>
+	<string>do</string>
 	<key>uuid</key>
-	<string>EED56540-BB6E-4FAF-B225-EDB13EC2F9B4</string>
+	<string>DF5F2644-C9BA-48AA-9D5C-8A0D4FA57C75</string>
 </dict>
 </plist>
