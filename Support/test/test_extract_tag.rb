@@ -1,4 +1,5 @@
 require 'test/unit'
+HOBO_ROOT = File.dirname(__FILE__) + "/../fixtures" unless Object.const_defined?("HOBO_ROOT")
 require File.dirname(__FILE__) + "/../lib/extract_tag"
 
 class TestTagExtractor < Test::Unit::TestCase

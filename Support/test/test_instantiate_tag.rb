@@ -1,5 +1,5 @@
 require "test/unit"
-HOBO_ROOT = File.dirname(__FILE__) + "/../fixtures"
+HOBO_ROOT = File.dirname(__FILE__) + "/../fixtures" unless Object.const_defined?("HOBO_ROOT")
 require File.dirname(__FILE__) + "/../lib/extract_tag"
 
 class TestInstantiateTag < Test::Unit::TestCase
@@ -20,6 +20,24 @@ class TestInstantiateTag < Test::Unit::TestCase
 
   def test_should_return_empty_string_if_invalid_tag
     tag_should_instantiate_to_be('xxx', '')
+  end
+
+  def test_should_support_one_anonymous_param
+    expected =<<-RUN_TAG
+<one-anonymous-param>
+  <do: />
+</one-anonymous-param>
+  RUN_TAG
+  tag_should_instantiate_to_be('one-anonymous-param', expected)
+  end
+
+  def test_should_support_one_named_param
+    expected =<<-RUN_TAG
+<one-named-param>
+  <explicit_name: />
+</one-named-param>
+  RUN_TAG
+  tag_should_instantiate_to_be('one-named-param', expected)
   end
 
   protected

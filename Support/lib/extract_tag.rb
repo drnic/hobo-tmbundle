@@ -7,9 +7,11 @@ end
 module Hobo; end
 
 module Hobo::Dryml
+  extend self
+
   # Extracts the original definition of a tag from its source file
   # Initially, only extracts from taglibs within HOBO_ROOT
-  def self.extract_tag(tag_name)
+  def extract_tag(tag_name)
     base_dir = "#{HOBO_ROOT}/taglibs"
     all_dryml_files = Dir[base_dir + "/**/*.dryml"]
     for file in all_dryml_files
@@ -32,9 +34,16 @@ module Hobo::Dryml
     ""
   end
 
-  def self.instantiate_tag(tag_name)
+  def instantiate_tag(tag_name)
     tag_src = extract_tag(tag_name)
     return "" if !tag_src || tag_src.strip == ""
+    attrs_snippets = attrs_snippets_from tag_src, tag_name
+    param_list = param_list_from tag_src, tag_name
+    "<#{tag_name}#{attrs_snippets} #{param_list}/>\n"
+  end
+
+  protected
+  def attrs_snippets_from tag_src, tag_name
     attrs_snippets = ""
     attrs_match = tag_src.match(%r{def tag="#{tag_name}"\s+attrs="([^"]+)"})
     if attrs_match
@@ -45,6 +54,13 @@ module Hobo::Dryml
         list
       end.join
     end
-    "<#{tag_name}#{attrs_snippets} />\n"
+    attrs_snippets
+  end
+
+  def param_list_from tag_src, tag_name
+    if matches = tag_src.scan(%r{\<([\w\-_]+)\s+.*param*>})
+      return matches[1..-1]
+    end
+    return []
   end
 end
