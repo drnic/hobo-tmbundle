@@ -49,6 +49,17 @@ class TestInstantiateTag < Test::Unit::TestCase
   tag_should_instantiate_to_be('one-anonymous-placeholder-param', expected)
   end
 
+  def test_should_support_nested_param
+    expected =<<-RUN_TAG
+<nested-param>
+  <body:></body:>
+  <content-header:></content-header:>
+    <heading:></heading:>
+</nested-param>
+  RUN_TAG
+  tag_should_instantiate_to_be('nested-param', expected)
+  end
+
   protected
   def tag_should_instantiate_to_be(tag_name, expected)
     tag_src = Hobo::Dryml.instantiate_tag(tag_name)

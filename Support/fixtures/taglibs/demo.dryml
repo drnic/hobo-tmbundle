@@ -13,18 +13,23 @@
 </def>
 
 <def tag="one-anonymous-tag-param">
-	<do param/>
+  <do param/>
 </def>
 
 <def tag="one-named-tag-param">
-	<do param="explicit_name"/>
+  <do param="explicit_name"/>
 </def>
 
 <def tag="one-anonymous-placeholder-param">
-	<body: param/>
+  <body: param/>
 </def>
 
-
+<def tag="nested-param">
+  <body: param/>
+  <content-header: param>
+    <heading param><this/></heading>
+	</content-header:>
+</def>
 
 <!-- for test_extract_tag -->
 <def tag="image" attrs="src">

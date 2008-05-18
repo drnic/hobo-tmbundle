@@ -43,8 +43,8 @@ module Hobo::Dryml
       "<#{tag_name}#{attrs_snippets} />\n"
     else
       "<#{tag_name}#{attrs_snippets}>\n" +
-        param_list.map do |param|
-          "  <#{param}:></#{param}:>\n"
+        param_list.map do |indent, param_name|
+          "#{indent}<#{param_name}:></#{param_name}:>\n"
         end.join +
       "</#{tag_name}>\n"
     end
@@ -66,8 +66,11 @@ module Hobo::Dryml
   end
 
   def param_list_from tag_src, tag_name
-    matches = tag_src.scan(%r{\<([\w\-_]+):?\s+.*param(?:\s|/|="([^"]+)").*>})
+    matches = tag_src.scan(%r{([\s\t]*)<([\w\-_]+):?\s+.*param(?:\s|/|>|="([^"]+)")})
     # just the name of the param (either an explicit name or the element name)
-    matches.map { |match_array| match_array.reject { |item| item.nil? }.last }
+    matches.map do |match_array|
+      indent, *names = match_array.reject { |item| item.nil? }
+      [indent.gsub("\n",''), names.last]
+    end
   end
 end
