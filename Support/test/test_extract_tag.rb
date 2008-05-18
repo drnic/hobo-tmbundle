@@ -22,6 +22,6 @@ TAG
 
   def test_should_not_find_xxx
     tag_src = Hobo::Dryml.extract_tag('xxx')
-    assert_nil(tag_src)
+    assert_equal("", tag_src)
   end
 end

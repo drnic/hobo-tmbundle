@@ -29,6 +29,6 @@ module Hobo::Dryml
         end
       end
     end
-    nil
+    ""
   end
 end
