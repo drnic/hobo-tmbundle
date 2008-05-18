@@ -2,4 +2,4 @@
 
 require File.dirname(__FILE__) + '/../lib/extract_tag'
 tag_name = ENV['TM_SELECTED_TEXT']
-puts Hobo::Dryml.extract_tag(tag_name)
+puts Hobo::Dryml.instantiate_tag(tag_name)

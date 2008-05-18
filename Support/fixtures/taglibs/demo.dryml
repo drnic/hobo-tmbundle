@@ -9,3 +9,7 @@
 <def tag="three-attributes" attrs="attr1, attr2, attr3">
 	<p>No param, 3 attributes</p>
 </def>
+
+<def tag="one-param">
+	Content
+</def>
