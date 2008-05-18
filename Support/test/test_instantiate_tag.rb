@@ -24,20 +24,29 @@ class TestInstantiateTag < Test::Unit::TestCase
 
   def test_should_support_one_anonymous_param
     expected =<<-RUN_TAG
-<one-anonymous-param>
+<one-anonymous-tag-param>
   <do: />
-</one-anonymous-param>
+</one-anonymous-tag-param>
   RUN_TAG
-  tag_should_instantiate_to_be('one-anonymous-param', expected)
+  tag_should_instantiate_to_be('one-anonymous-tag-param', expected)
   end
 
   def test_should_support_one_named_param
     expected =<<-RUN_TAG
-<one-named-param>
+<one-named-tag-param>
   <explicit_name: />
-</one-named-param>
+</one-named-tag-param>
   RUN_TAG
-  tag_should_instantiate_to_be('one-named-param', expected)
+  tag_should_instantiate_to_be('one-named-tag-param', expected)
+  end
+
+  def test_should_support_one_placeholder_param
+    expected =<<-RUN_TAG
+<one-anonymous-placeholder-param>
+  <body: />
+</one-anonymous-placeholder-param>
+  RUN_TAG
+  tag_should_instantiate_to_be('one-anonymous-placeholder-param', expected)
   end
 
   protected

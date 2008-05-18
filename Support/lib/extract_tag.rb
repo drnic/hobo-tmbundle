@@ -66,7 +66,7 @@ module Hobo::Dryml
   end
 
   def param_list_from tag_src, tag_name
-    matches = tag_src.scan(%r{\<([\w\-_]+)\s+.*param(?:\s|="([^"]+)").*>})
+    matches = tag_src.scan(%r{\<([\w\-_]+):?\s+.*param(?:\s|/|="([^"]+)").*>})
     # just the name of the param (either an explicit name or the element name)
     matches.map { |match_array| match_array.reject { |item| item.nil? }.last }
   end

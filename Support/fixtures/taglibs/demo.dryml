@@ -12,13 +12,18 @@
 	<p>No param, 3 attributes</p>
 </def>
 
-<def tag="one-anonymous-param">
-	<do param />
+<def tag="one-anonymous-tag-param">
+	<do param/>
 </def>
 
-<def tag="one-named-param">
+<def tag="one-named-tag-param">
 	<do param="explicit_name"/>
 </def>
+
+<def tag="one-anonymous-placeholder-param">
+	<body: param/>
+</def>
+
 
 
 <!-- for test_extract_tag -->
