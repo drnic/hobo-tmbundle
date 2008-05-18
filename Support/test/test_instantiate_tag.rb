@@ -25,7 +25,7 @@ class TestInstantiateTag < Test::Unit::TestCase
   def test_should_support_one_anonymous_param
     expected =<<-RUN_TAG
 <one-anonymous-tag-param>
-  <do: />
+  <do:></do:>
 </one-anonymous-tag-param>
   RUN_TAG
   tag_should_instantiate_to_be('one-anonymous-tag-param', expected)
@@ -34,7 +34,7 @@ class TestInstantiateTag < Test::Unit::TestCase
   def test_should_support_one_named_param
     expected =<<-RUN_TAG
 <one-named-tag-param>
-  <explicit_name: />
+  <explicit_name:></explicit_name:>
 </one-named-tag-param>
   RUN_TAG
   tag_should_instantiate_to_be('one-named-tag-param', expected)
@@ -43,7 +43,7 @@ class TestInstantiateTag < Test::Unit::TestCase
   def test_should_support_one_placeholder_param
     expected =<<-RUN_TAG
 <one-anonymous-placeholder-param>
-  <body: />
+  <body:></body:>
 </one-anonymous-placeholder-param>
   RUN_TAG
   tag_should_instantiate_to_be('one-anonymous-placeholder-param', expected)

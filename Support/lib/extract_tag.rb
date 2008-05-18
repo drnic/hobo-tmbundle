@@ -44,7 +44,7 @@ module Hobo::Dryml
     else
       "<#{tag_name}#{attrs_snippets}>\n" +
         param_list.map do |param|
-          "  <#{param}: />\n"
+          "  <#{param}:></#{param}:>\n"
         end.join +
       "</#{tag_name}>\n"
     end
