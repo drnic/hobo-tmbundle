@@ -1,3 +1,11 @@
-<def tag="no_param">
+<def tag="no-param">
 	<p>Simple no param, no attributes</p>
+</def>
+
+<def tag="one-attribute" attrs="attr1">
+	<p>No param, one attribute</p>
+</def>
+
+<def tag="three-attributes" attrs="attr1, attr2, attr3">
+	<p>No param, 3 attributes</p>
 </def>

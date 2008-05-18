@@ -31,10 +31,20 @@ module Hobo::Dryml
     end
     ""
   end
-  
+
   def self.instantiate_tag(tag_name)
     tag_src = extract_tag(tag_name)
     return "" if !tag_src || tag_src.strip == ""
-    "<#{tag_name} />\n"
+    attrs_snippets = ""
+    attrs_match = tag_src.match(%r{def tag="#{tag_name}"\s+attrs="([^"]+)"})
+    if attrs_match
+      attr_names = attrs_match[1].split(/\s*,\s*/)
+      attrs_snippets = attr_names.inject([]) do |list, attr|
+        index = list.size * 2 + 1
+        list << %Q{${#{index}: #{attr}="${#{index+1}:#{attr}}"}}
+        list
+      end.join
+    end
+    "<#{tag_name}#{attrs_snippets} />\n"
   end
 end
