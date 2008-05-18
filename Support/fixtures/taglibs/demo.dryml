@@ -13,7 +13,7 @@
 </def>
 
 <def tag="one-anonymous-param">
-	<do param/>
+	<do param />
 </def>
 
 <def tag="one-named-param">
@@ -27,3 +27,4 @@
 </def>
 
 <def tag="item"><% scope.items << parameters.default %></def>
+

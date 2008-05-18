@@ -39,7 +39,15 @@ module Hobo::Dryml
     return "" if !tag_src || tag_src.strip == ""
     attrs_snippets = attrs_snippets_from tag_src, tag_name
     param_list = param_list_from tag_src, tag_name
-    "<#{tag_name}#{attrs_snippets} #{param_list}/>\n"
+    if !param_list || param_list.length == 0
+      "<#{tag_name}#{attrs_snippets} />\n"
+    else
+      "<#{tag_name}#{attrs_snippets}>\n" +
+        param_list.map do |param|
+          "  <#{param}: />\n"
+        end.join +
+      "</#{tag_name}>\n"
+    end
   end
 
   protected
@@ -58,9 +66,8 @@ module Hobo::Dryml
   end
 
   def param_list_from tag_src, tag_name
-    if matches = tag_src.scan(%r{\<([\w\-_]+)\s+.*param*>})
-      return matches[1..-1]
-    end
-    return []
+    matches = tag_src.scan(%r{\<([\w\-_]+)\s+.*param(?:\s|="([^"]+)").*>})
+    # just the name of the param (either an explicit name or the element name)
+    matches.map { |match_array| match_array.reject { |item| item.nil? }.last }
   end
 end
