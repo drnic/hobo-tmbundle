@@ -40,7 +40,7 @@ module Hobo::Dryml
     attrs_snippets = attrs_snippets_from tag_src, tag_name
     param_list = param_list_from tag_src, tag_name
     if !param_list || param_list.length == 0
-      "<#{tag_name}#{attrs_snippets} />\n"
+      "<#{tag_name}#{attrs_snippets}>$0</#{tag_name}>\n"
     else
       "<#{tag_name}#{attrs_snippets}>\n" +
         param_list.map do |indent, param_name|

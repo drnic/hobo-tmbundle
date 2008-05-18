@@ -4,17 +4,17 @@ require File.dirname(__FILE__) + "/../lib/extract_tag"
 
 class TestInstantiateTag < Test::Unit::TestCase
   def test_should_support_tag_with_no_param
-    expected = "<no-param />\n"
+    expected = "<no-param>$0</no-param>\n"
     tag_should_instantiate_to_be('no-param', expected)
   end
 
   def test_should_support_one_attribute
-    expected = %Q{<one-attribute${1: attr1="${2:attr1}"} />\n}
+    expected = %Q{<one-attribute${1: attr1="${2:attr1}"}>$0</one-attribute>\n}
     tag_should_instantiate_to_be('one-attribute', expected)
   end
 
   def test_should_support_many_attributes
-    expected = %Q{<three-attributes${1: attr1="${2:attr1}"}${3: attr2="${4:attr2}"}${5: attr3="${6:attr3}"} />\n}
+    expected = %Q{<three-attributes${1: attr1="${2:attr1}"}${3: attr2="${4:attr2}"}${5: attr3="${6:attr3}"}>$0</three-attributes>\n}
     tag_should_instantiate_to_be('three-attributes', expected)
   end
 
