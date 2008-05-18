@@ -7,7 +7,7 @@
 	$0
 &lt;/def&gt;</string>
 	<key>name</key>
-	<string>def tag (def)</string>
+	<string>def tag (def ⇥)</string>
 	<key>scope</key>
 	<string>text.html.ruby.dryml</string>
 	<key>tabTrigger</key>
