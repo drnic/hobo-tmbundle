@@ -50,14 +50,14 @@ module Hobo::Dryml
     end
   end
 
-  def autocomplete_tag(tag_name_prefix)
-    return [] if tag_name_prefix.strip.length == 0
+  def autocomplete_tag(tag_name_partial)
+    return [] if tag_name_partial.strip.length == 0
     base_dir = "#{HOBO_ROOT}/taglibs"
     all_dryml_files = Dir[base_dir + "/**/*.dryml"]
     all_dryml_files.inject([]) do |list, file|
       contents = File.read(file).split("\n")
       contents.each_with_index do |line, index|
-        matches = line.match(/<def tag="(#{tag_name_prefix}[^"]*)"/)
+        matches = line.match(/<def tag="([^"]*#{tag_name_partial}[^"]*)"/)
         list << matches[1] if matches && matches[1]
       end
       list

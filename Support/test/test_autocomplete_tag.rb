@@ -20,14 +20,19 @@ class TestAutocompleteTag < Test::Unit::TestCase
   end
 
   def test_can_find_multiple_tags
-    expected = %w[one-attribute one-anonymous-tag-param one-named-tag-param" one-anonymous-placeholder-param]
+    expected = %w[one-attribute one-anonymous-tag-param one-named-tag-param one-anonymous-placeholder-param]
     tag_autocompletion_should_be expected, 'one-'
     tag_autocompletion_should_be expected, 'one'
   end
 
+  def test_should_return_tags_with_partial_inside
+    expected = %w[one-anonymous-tag-param one-anonymous-placeholder-param]
+    tag_autocompletion_should_be expected, 'anonymous'
+  end
+
   protected
-  def tag_autocompletion_should_be expected, tag_name_prefix
-    autocompletion_list = Hobo::Dryml.autocomplete_tag(tag_name_prefix)
+  def tag_autocompletion_should_be expected, tag_name_partial
+    autocompletion_list = Hobo::Dryml.autocomplete_tag(tag_name_partial)
     assert_equal(expected, autocompletion_list)
   end
 end

@@ -16,7 +16,7 @@ With: http://macromates.com/svn/Bundles/trunk/Support
 end
 
 require File.dirname(__FILE__) + '/../lib/extract_tag'
-tag_name_prefix = ENV['TM_SELECTED_TEXT'] || ENV['TM_CURRENT_WORD']
-list = Hobo::Dryml.autocomplete_tag(tag_name_prefix)
-result = TextMate::UI.request_item(:items => list.uniq, :title => 'Select Hobo tag:')
+tag_name_partial = ENV['TM_SELECTED_TEXT'] || ENV['TM_CURRENT_WORD']
+list = Hobo::Dryml.autocomplete_tag(tag_name_partial)
+result = TextMate::UI.request_item(:items => list.uniq.sort, :title => 'Select Hobo tag:')
 puts result || ""
