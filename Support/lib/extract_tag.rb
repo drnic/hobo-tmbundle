@@ -50,6 +50,20 @@ module Hobo::Dryml
     end
   end
 
+  def autocomplete_tag(tag_name_prefix)
+    return [] if tag_name_prefix.strip.length == 0
+    base_dir = "#{HOBO_ROOT}/taglibs"
+    all_dryml_files = Dir[base_dir + "/**/*.dryml"]
+    all_dryml_files.inject([]) do |list, file|
+      contents = File.read(file).split("\n")
+      contents.each_with_index do |line, index|
+        matches = line.match(/<def tag="(#{tag_name_prefix}[^"]*)"/)
+        list << matches[1] if matches && matches[1]
+      end
+      list
+    end
+  end
+
   protected
   def attrs_snippets_from tag_src, tag_name
     attrs_snippets = ""
