@@ -15,7 +15,44 @@
 	<array>
 		<dict>
 			<key>begin</key>
-			<string>&gt;&gt;</string>
+			<string>\G([ ]{4}|\t)&gt;&gt;\s*\n</string>
+			<key>captures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.section.embedded.ruby</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>\G\n</string>
+			<key>name</key>
+			<string>source.ruby.irb.block</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.ruby</string>
+						</dict>
+					</dict>
+					<key>match</key>
+					<string>(#).*?(?=-?%&gt;)</string>
+					<key>name</key>
+					<string>comment.line.number-sign.ruby</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>source.ruby.rails</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>\G([ ]{4}|\t)(?=&gt;&gt;\s|=&gt;\s)</string>
 			<key>captures</key>
 			<dict>
 				<key>0</key>
