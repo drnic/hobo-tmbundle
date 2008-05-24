@@ -1,7 +1,11 @@
 unless Object.const_defined?("HOBO_ROOT")
   require "rubygems"
   gem 'hobo'
-  require 'hobo' rescue nil
+  begin
+    require 'hobo' 
+  rescue MissingSourceFile
+    ;
+  end
   HOBO_ROOT = $:.find { |path| path =~ %r{/hobo-\d+\.\d+\.\d+/lib} } unless Object.const_defined?("HOBO_ROOT")
 end
 module Hobo; end
