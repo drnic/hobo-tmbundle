@@ -3,7 +3,7 @@ unless Object.const_defined?("HOBO_ROOT")
   gem 'hobo'
   begin
     require 'hobo'
-  rescue MissingSourceFile
+  rescue Exception => e
     ;
   end
   unless Object.const_defined?("HOBO_ROOT")
