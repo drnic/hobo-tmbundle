@@ -14,7 +14,7 @@
 	<key>input</key>
 	<string>selection</string>
 	<key>keyEquivalent</key>
-	<string>~@t</string>
+	<string></string>
 	<key>name</key>
 	<string>Instantiate tag</string>
 	<key>output</key>
