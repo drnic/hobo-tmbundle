@@ -1,4 +1,4 @@
-require 'test/unit'
+require File.dirname(__FILE__) + '/test_helper'
 HOBO_ROOT = File.dirname(__FILE__) + "/fixtures" unless Object.const_defined?("HOBO_ROOT")
 require File.dirname(__FILE__) + "/../lib/extract_tag"
 
@@ -25,4 +25,5 @@ TAG
     tag_src = Hobo::Dryml.extract_tag('xxx')
     assert_equal("", tag_src)
   end
+  
 end

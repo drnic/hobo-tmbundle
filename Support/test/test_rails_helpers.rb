@@ -11,10 +11,6 @@ class TestRailsHelper < Test::Unit::TestCase
   end
   
   context "Random file outside of a Rails app" do
-    setup do
-      FileUtils.chdir "/tmp"
-    end
-
     should "not find any RAILS_ROOT" do
       assert_nil(RailsHelper.rails_root("/tmp"))
     end
