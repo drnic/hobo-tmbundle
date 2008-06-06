@@ -1,3 +1,4 @@
+# Original code pastie by Christoph Blank http://pastie.org/203129
 require File.dirname(__FILE__) + '/rails_helper'
 
 module Hobo; end
