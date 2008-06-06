@@ -1,0 +1,60 @@
+<def tag="call-tag" attrs="tag">
+  <%= send(tag.gsub('-', '_'), attributes, parameters) %>
+</def>
+
+
+<def tag="wrap" attrs="tag, when, parameter">
+  <% parameter ||= :default %>
+  <%= when_ ? send(tag, attributes, { parameter.to_sym => parameters[:default] }) : parameter.default %>
+</def>
+
+    
+<def tag="partial" attrs="name, locals"><%= 
+   locals ||= {}
+   render(:partial => name, :locals => locals.merge(:this => this))
+%></def>
+
+
+<def tag="repeat" attrs="even-odd, join">
+  <if><%= 
+    if even_odd
+      map_this do
+        klass = [attributes[:class], cycle("even", "odd")].compact.join(' ')
+        element(even_odd, attributes.merge(:class => klass, "hobo-model-id" => dom_id(this)), parameters.default)
+      end.join(join)
+    else
+      scope.new_scope do
+        scope[:even_odd] = "odd"
+        map_this do
+          res = parameters.default
+          scope.even_odd = scope.even_odd == "even" ? "odd" : "even"
+          res
+        end.join(join)
+      end
+    end %>
+  </if>
+</def>
+
+
+<def tag="do"><%= parameters.default %></def>
+<def tag="with" alias-of="do"/>
+
+
+<def tag="if" attrs="test"><%= 
+  test = all_attributes.fetch(:test, this)
+  res = (cond = !test.blank?) ? parameters.default : ""
+  Hobo::Dryml.last_if = cond
+  res
+%></def>
+
+
+<def tag="else"><%= parameters.default unless Hobo::Dryml.last_if %></def>
+
+
+<def tag="unless" attrs="test"><%= 
+  test = all_attributes.fetch(:test, this)     
+  res = (cond = test.blank?) ? parameters.default : ""
+  Hobo::Dryml.last_if = cond
+  res
+%></def>
+

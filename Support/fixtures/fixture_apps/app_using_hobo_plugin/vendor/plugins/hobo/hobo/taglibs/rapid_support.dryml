@@ -1,0 +1,64 @@
+<def tag="with-fields" attrs="fields, associations, skip, skip-associations, include-timestamps, force-all"><%
+  fields.nil? || associations.nil? or raise ArgumentError, "with-fields -- specify either fields or associations but not both"
+   
+  field_names = if associations == "has_many"
+                  this.class.reflections.values.select { |refl| refl.macro == :has_many }.map { |refl| refl.name.to_s }
+                                                                                                                
+                elsif fields.nil? || fields == "*" || fields.is_a?(Class)
+                  klass = fields.is_a?(Class) ? fields : this.class
+                  columns = klass.content_columns.*.name
+                  columns -= %w{created_at updated_at created_on updated_on} unless include_timestamps
+
+                  if skip_associations == "has_many"
+                    assocs = this.class.reflections.values.reject {|r| r.macro == :has_many }.map &its.name.to_s
+                    columns + assocs
+                  elsif skip_associations
+                    columns
+                  else
+                    assocs = klass.reflections.values.map &its.name.to_s
+                    columns + assocs
+                  end
+                else
+                  comma_split(fields)
+                end
+  field_names -= comma_split(skip) if skip
+  field_names = field_names.select {|f| can_view?(this, f)} unless force_all
+  field_names.each do |field| 
+    if field == "this"
+      %><do param="default"/><%
+    else
+      %><with field="&field"><do param="default"/></with><%
+    end
+  end
+%></def>
+
+<def tag="with-field-names" attrs="fields, skip, skip-associations, include-timestamps"><%=
+  field_names = if fields.nil? || fields == "*" || fields.is_a?(Class)
+                  klass = fields.is_a?(Class) ? fields : this.member_class
+                  columns = klass.content_columns.*.name
+                  columns -= %w{created_at updated_at created_on updated_on} unless include_timestamps
+
+                  if skip_associations == "has_many"
+                    assocs = this.reflections.values.reject {|r| r.macro == :has_many }.map &its.name.to_s
+                    columns + assocs
+                  elsif skip_associations
+                    columns
+                  else
+                    assocs = klass.reflections.values.map &its.name.to_s
+                    columns + assocs
+                  end
+                else
+                  comma_split(fields)
+                end
+
+  field_names -= comma_split(skip) if skip
+  scope.new_scope do
+    field_names.map do |n|
+      scope.field_name = n == "this" ? this.member_class.name : n.to_s.gsub("." , "_") 
+      scope.field_path = n
+      parameters.default
+    end
+  end
+%>
+</def>
+

@@ -1,0 +1,57 @@
+<def tag="table-plus" attrs="sort-field, sort-direction, sort-columns" >
+  <% sort_field ||= @sort_field; sort_direction ||= @sort_direction; sort_columns ||= {} %>
+  <% sort_columns['this'] ||= this.member_class.name_attribute %>
+  <div class="table-plus" merge-attrs="&attributes - attrs_for(:with_fields) - attrs_for(:table)">
+    <div class="header" param="header">
+      <div class="search">
+        <form param="search-form" method="get" action="">
+          <hidden-fields for-query-string skip="page, search_form"/>
+          <span>Search</span>
+          <input class="search" type="search" name="search" value="&params[:search]"/>
+          <submit label="Go" class="search-button" param="search-submit"/>
+        </form>
+      </div>
+    </div>
+
+    <table merge-attrs="&attributes & (attrs_for(:table) + attrs_for(:with_fields))" empty merge-params>
+      <field-heading-row:>
+        <with-field-names merge-attrs="&all_attributes & attrs_for(:with_fields)">
+          <% col = sort_columns[scope.field_path] || scope.field_path
+             sort = sort_field == col && sort_direction == 'asc' ?
+                      "-#{col}" : col
+             sort_url = url_for(params.merge(:sort => sort) - [:page]) %>
+                          
+          <th param="#{scope.field-name}-heading">
+            <a href="&sort_url" class="column-sort" 
+               param="#{scope.field-name}-heading-link"><%= scope.field_name.titleize %></a>
+            <if test="&col == sort_field">
+              <do param="up-arrow" if="&sort_direction == 'desc'">&uarr;</do>
+              <do param="down-arrow" if="&sort_direction == 'asc'">&darr;</do>
+            </if>
+          </th>
+        </with-field-names>
+        <th if="&all_parameters[:controls]" class="controls"/>
+      </field-heading-row>
+    </table>    
+    <do param="empty-message" if="empty?">No <name-for-collection lowercase/> to display</do>
+
+   
+    <nav class="page" if="&this.respond_to? :page_count">
+      <page-nav param/>
+    </nav>
+  </div>
+</def>
+
+
+<def tag="change-password-form">
+  <form class="change-password" param>
+    <field-list fields="current_password, password, password_confirmation" param>
+      <password-label:>New Password</password-label:>
+      <password-confirmation-label:>Confirm New Password</password-confirmation-label:>
+    </field-list>
+    
+    <div class="actions" param="actions">
+      <submit label="Change Password" param/>
+    </div>
+  </form>
+</def>

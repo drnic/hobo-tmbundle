@@ -1,0 +1,12 @@
+require 'echoe'
+
+Echoe.new('hobosupport') do |p|
+  p.author  = "Tom Locke"
+  p.email   = "tom@tomlocke.com"
+  p.summary = "Core Ruby extensions from the Hobo project"
+  p.url     = "http://hobocentral.net/hobosupport"
+  p.project = "hobo"
+  
+  p.changelog = "CHANGES.txt"
+  p.version   = "0.7.5"
+end
