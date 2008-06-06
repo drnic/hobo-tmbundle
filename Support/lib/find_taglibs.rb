@@ -5,14 +5,17 @@ module Hobo::Dryml
   extend self
 
   def find_taglibs(current_file)
-    rails_root = RailsHelper.rails_root current_file
-    files = Dir["#{rails_root}/app/views/#{taglibs_dir_pattern}"] # user taglibs
-    if Dir["#{rails_root}/vendor/{plugins,gems}/{hobo,hobo-*}/"].empty? # proj without gem/plugin
+    files = []
+    if rails_root = RailsHelper.rails_root(current_file)
+      files = Dir["#{rails_root}/app/views/#{taglibs_dir_pattern}"] # user taglibs
+      if Dir["#{rails_root}/vendor/{plugins,gems}/{hobo,hobo-*}/"].empty? # proj without gem/plugin
+        files.concat system_gem_taglibs
+      else # proj with gem/plugin
+        files.concat Dir["#{rails_root}/vendor/{plugins,gems}/{hobo,hobo-*}/#{taglibs_dir_pattern}"]
+      end
+    else #  no rails proj
       files.concat system_gem_taglibs
-    else # proj with gem/plugin
-      files.concat Dir["#{rails_root}/vendor/{plugins,gems}/{hobo,hobo-*}/#{taglibs_dir_pattern}"]
     end
-
     files.uniq
   end
   
