@@ -1,3 +1,5 @@
+require File.dirname(__FILE__) + '/rails_helper'
+
 module Hobo; end
 module Hobo::Dryml
   extend self

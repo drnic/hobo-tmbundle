@@ -1,8 +1,11 @@
-require "test/unit"
-HOBO_ROOT = File.dirname(__FILE__) + "/fixtures" unless Object.const_defined?("HOBO_ROOT")
+require File.dirname(__FILE__) + '/test_helper'
 require File.dirname(__FILE__) + "/../lib/extract_tag"
 
 class TestInstantiateTag < Test::Unit::TestCase
+  def setup
+    Hobo::Dryml.expects(:find_taglibs).with(__FILE__).returns([File.dirname(__FILE__) + "/fixtures/taglibs/demo.dryml"])
+  end
+
   def test_should_support_tag_with_no_param
     expected = "<no-param>$0</no-param>\n"
     tag_should_instantiate_to_be('no-param', expected)
@@ -62,7 +65,7 @@ class TestInstantiateTag < Test::Unit::TestCase
 
   protected
   def tag_should_instantiate_to_be(tag_name, expected)
-    tag_src = Hobo::Dryml.instantiate_tag(tag_name)
+    tag_src = Hobo::Dryml.instantiate_tag(tag_name, __FILE__)
     assert_equal(expected, tag_src)
   end
 end

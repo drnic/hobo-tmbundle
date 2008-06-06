@@ -1,15 +1,17 @@
-unless Object.const_defined?("HOBO_ROOT")
-  require "rubygems"
-  gem 'hobo'
-  begin
-    require 'hobo'
-  rescue Exception => e
-    ;
-  end
-  unless Object.const_defined?("HOBO_ROOT")
-    HOBO_ROOT = $:.find { |path| path =~ %r{/hobo-\d+\.\d+\.\d+/lib} }.gsub("/lib", '')
-  end
-end
+# unless Object.const_defined?("HOBO_ROOT")
+#   require "rubygems"
+#   gem 'hobo'
+#   begin
+#     require 'hobo'
+#   rescue Exception => e
+#     ;
+#   end
+#   unless Object.const_defined?("HOBO_ROOT")
+#     HOBO_ROOT = $:.find { |path| path =~ %r{/hobo-\d+\.\d+\.\d+/lib} }.gsub("/lib", '')
+#   end
+# end
+require File.dirname(__FILE__) + '/find_taglibs'
+
 module Hobo; end
 
 module Hobo::Dryml
@@ -17,9 +19,8 @@ module Hobo::Dryml
 
   # Extracts the original definition of a tag from its source file
   # Initially, only extracts from taglibs within HOBO_ROOT
-  def extract_tag(tag_name)
-    base_dir = "#{HOBO_ROOT}/taglibs"
-    all_dryml_files = Dir[base_dir + "/**/*.dryml"]
+  def extract_tag(tag_name, current_file)
+    all_dryml_files = find_taglibs(current_file)
     for file in all_dryml_files
       contents = File.read(file).split("\n")
       start_index, end_index, def_count = nil, contents.length - 1, 0
@@ -40,8 +41,8 @@ module Hobo::Dryml
     ""
   end
 
-  def instantiate_tag(tag_name)
-    tag_src = extract_tag(tag_name)
+  def instantiate_tag(tag_name, current_file)
+    tag_src = extract_tag(tag_name, current_file)
     return "" if !tag_src || tag_src.strip == ""
     attrs_snippets = attrs_snippets_from tag_src, tag_name
     param_list = param_list_from tag_src, tag_name
@@ -56,10 +57,9 @@ module Hobo::Dryml
     end
   end
 
-  def autocomplete_tag(tag_name_partial)
+  def autocomplete_tag(tag_name_partial, current_file)
     return [] if tag_name_partial.strip.length == 0
-    base_dir = "#{HOBO_ROOT}/taglibs"
-    all_dryml_files = Dir[base_dir + "/**/*.dryml"]
+    all_dryml_files = find_taglibs(current_file)
     all_dryml_files.inject([]) do |list, file|
       contents = File.read(file).split("\n")
       contents.each_with_index do |line, index|

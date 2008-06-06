@@ -1,8 +1,11 @@
-require "test/unit"
-HOBO_ROOT = File.dirname(__FILE__) + "/fixtures" unless Object.const_defined?("HOBO_ROOT")
+require File.dirname(__FILE__) + '/test_helper'
 require File.dirname(__FILE__) + "/../lib/extract_tag"
 
 class TestAutocompleteTag < Test::Unit::TestCase
+  def setup
+    Hobo::Dryml.stubs(:find_taglibs).with(__FILE__).returns([File.dirname(__FILE__) + "/fixtures/taglibs/demo.dryml"])
+  end
+
   def test_no_characters_returns_empty_list
     expected = []
     tag_autocompletion_should_be expected, ""
@@ -32,7 +35,7 @@ class TestAutocompleteTag < Test::Unit::TestCase
 
   protected
   def tag_autocompletion_should_be expected, tag_name_partial
-    autocompletion_list = Hobo::Dryml.autocomplete_tag(tag_name_partial)
+    autocompletion_list = Hobo::Dryml.autocomplete_tag(tag_name_partial, __FILE__)
     assert_equal(expected, autocompletion_list)
   end
 end

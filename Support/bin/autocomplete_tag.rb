@@ -17,6 +17,6 @@ end
 
 require File.dirname(__FILE__) + '/../lib/extract_tag'
 tag_name_partial = ENV['TM_SELECTED_TEXT'] || ENV['TM_CURRENT_WORD']
-list = Hobo::Dryml.autocomplete_tag(tag_name_partial)
+list = Hobo::Dryml.autocomplete_tag(tag_name_partial, ENV['TM_FILEPATH'])
 result = TextMate::UI.request_item(:items => list.uniq.sort, :title => 'Select Hobo tag:')
 print result || list.inspect || tag_name_partial
